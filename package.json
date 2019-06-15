@@ -1,0 +1,26 @@
+{
+  "name": "vertical-tower-defense",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishawkins/verticaltowerdefense.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrishawkins/verticaltowerdefense/issues"
+  },
+  "homepage": "https://github.com/chrishawkins/verticaltowerdefense#readme"
+}
