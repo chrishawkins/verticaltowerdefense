@@ -11,7 +11,6 @@ export class GameCanvas {
     canvasElement.setAttribute('width', VIEWPORT_WIDTH * SCREEN_VIEWPORT_RATIO);
 
     this.context.fillStyle = '#e2fcbf';
-    this.context.fillRect(0, 0, canvasElement.clientWidth, canvasElement.clientHeight);
   }
   
   drawImage(image, x, y, width, height) {
@@ -21,5 +20,9 @@ export class GameCanvas {
       y * SCREEN_VIEWPORT_RATIO,
       width * SCREEN_VIEWPORT_RATIO,
       height * SCREEN_VIEWPORT_RATIO);
+  }
+
+  clear() {
+    this.context.fillRect(0, 0, this.canvasElement.clientWidth, this.canvasElement.clientHeight);
   }
 }
