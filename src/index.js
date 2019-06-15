@@ -15,10 +15,10 @@ context.fillStyle = '#e2fcbf';
 context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
 assets.loadImage('images/green_blob.png').then(img => {
-    context.drawImage(
-        img,
-        25 * SCREEN_VIEWPORT_RATIO,
-        25 * SCREEN_VIEWPORT_RATIO,
-        128 * SCREEN_VIEWPORT_RATIO,
-        128 * SCREEN_VIEWPORT_RATIO);
+  context.drawImage(
+    img,
+    25 * SCREEN_VIEWPORT_RATIO,
+    25 * SCREEN_VIEWPORT_RATIO,
+    128 * SCREEN_VIEWPORT_RATIO,
+    128 * SCREEN_VIEWPORT_RATIO);
 });
