@@ -10,10 +10,10 @@ import GameplayGrid from './gameplayGrid.js';
 const gameCanvas = new GameCanvas((document.getElementById('main-canvas') : any));
 new InputHelper(gameCanvas);
 
-const monster = new Monster();
 const grid = new GameplayGrid();
+const entities = [ grid, new ToolPalette(gameCanvas, grid) ];
 
-const entities = [ monster, grid, new ToolPalette(gameCanvas, grid) ];
+grid.spawnMonster();
 
 let time = 0;
 
