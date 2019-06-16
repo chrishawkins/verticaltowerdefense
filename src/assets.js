@@ -1,8 +1,8 @@
 // @flow
 
 export default {
-  loadImage(url: string) {
-    return new Promise<Image>((resolve, reject) => {
+  loadImage(url: string): Promise<Image> {
+    return new Promise((resolve, reject) => {
       const img = new Image();
       img.addEventListener('load', () => {
           resolve(img);
