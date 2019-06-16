@@ -13,12 +13,12 @@ export class ToolPalette extends Entity {
   }
 
   draw(canvas) {
-    canvas.fillRect('#ffffff', 0, canvas.height() - 130, canvas.width(), 130);
-    canvas.fillRect('#333333', 0, canvas.height() - 133, canvas.width(), 3);
+    canvas.fillRect('#ffffff', 0, canvas.height - 130, canvas.width, 130);
+    canvas.fillRect('#333333', 0, canvas.height - 133, canvas.width, 3);
     canvas.drawImage(
       this.wallToolImage,
-      canvas.width() / 2 - 128 - 8,
-      canvas.height() - 120,
+      canvas.width / 2 - 128 - 8,
+      canvas.height - 120,
       128,
       108);
   }

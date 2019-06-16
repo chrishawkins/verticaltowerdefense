@@ -40,11 +40,11 @@ export class GameCanvas {
       height * SCREEN_VIEWPORT_RATIO);
   }
 
-  height() {
+  get height() {
     return VIEWPORT_HEIGHT;
   }
   
-  width() {
+  get width() {
     return VIEWPORT_WIDTH;
   }
 }
