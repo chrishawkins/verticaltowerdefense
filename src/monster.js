@@ -3,6 +3,7 @@
 import assets from './assets.js';
 import Entity from './entity.js';
 import GameCanvas from './canvas.js';
+import Wall from './wall.js';
 import { type Bounds, doBoundsIntersect } from './mathTypes.js';
 
 type State = 'DESCENDING' | 'ATTACKING';
@@ -12,8 +13,10 @@ export default class Monster extends Entity {
   yPosition: number;
   scale: number;
   totalTime: number;
+  lastAttackTime: number;
   image: Image;
   state: State;
+  target: ?Wall;
 
   constructor(xPos: number) {
     super();
@@ -41,23 +44,37 @@ export default class Monster extends Entity {
   }
 
   update(elapsedSec: number) {
+    const target = this.target;
+    
     if (this.state === 'DESCENDING') {
       this.yPosition = this.yPosition + 10 * elapsedSec;
+    } else if (this.state === 'ATTACKING' && target) {
+      if (target.isDestroyed) {
+        this.state = 'DESCENDING';
+      } else if (this.totalTime - this.lastAttackTime > 1) {
+        target.attack(1);
+        this.lastAttackTime = this.totalTime;
+      }
     }
     
     this.totalTime += elapsedSec;
     this.scale = 0.05 * Math.sin(2 * this.totalTime) + 1.0;
   }
 
-  testWallCollision(bounds: Bounds) {
+  testWallCollision(wall: Wall) {
+    if (this.state === 'ATTACKING') {
+      return;
+    }
     const monsterBounds = {
       x: this.xPosition,
       y: this.yPosition,
       width: 128,
       height: 128
     };
-    if (doBoundsIntersect(bounds, monsterBounds)) {
+    if (doBoundsIntersect(wall.boundingBox, monsterBounds)) {
       this.state = 'ATTACKING';
+      this.target = wall;
+      this.lastAttackTime = this.totalTime;
     }
   }
 }

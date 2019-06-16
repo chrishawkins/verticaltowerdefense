@@ -4,36 +4,33 @@ import assets from './assets.js';
 import Entity from './entity.js';
 import GameCanvas from './canvas.js';
 import Monster from './monster.js';
+import Wall from './wall.js';
 import { type Bounds } from './mathTypes.js';
 
 const COLUMN_SIZE = 120;
 const ROW_SIZE = 120;
 const NUM_COLUMNS = 6;
 
-type GridLocation = {| x: number, y: number |};
-
 export default class GameplayGrid extends Entity {
-  wallLocations: Array<GridLocation>;
   monsters: Array<Monster>;
-  wallImage: Image;
+  walls: Array<Wall>;
 
   constructor() {
     super();
-    this.wallLocations = [];
+    this.walls = [];
     this.monsters = [];
   }
 
   load() {
-    return assets.loadImage('images/wall.png').then(img => {
-      this.wallImage = img;
-    });
   }
 
   addWallPiece(x: number, y: number) {
-    this.wallLocations.push({
-      x: Math.floor(x / COLUMN_SIZE),
-      y: Math.floor(y / ROW_SIZE)
-    });
+    const column = Math.floor(x / COLUMN_SIZE);
+    const row = Math.floor(y / ROW_SIZE);
+    const wall = new Wall(
+      column * COLUMN_SIZE - 4,
+      row * ROW_SIZE + 6);
+    wall.load().then(() => this.walls.push(wall));
   }
 
   spawnMonster() {
@@ -44,35 +41,18 @@ export default class GameplayGrid extends Entity {
   
   draw(canvas: GameCanvas) {
     this.monsters.forEach(monster => monster.draw(canvas));
-    this.wallLocations.forEach(wallLocation => {
-      canvas.drawImage(
-        this.wallImage,
-        wallLocation.x * COLUMN_SIZE - 4,
-        wallLocation.y * ROW_SIZE + 6,
-        128,
-        108
-      )
-    });
+    this.walls.forEach(wall => wall.draw(canvas));
   }
 
   update(elapsedTime: number) {
     this.monsters.forEach(monster => {
       monster.update(elapsedTime);
 
-      this.wallLocations.forEach(wallLocation => {
-        monster.testWallCollision(this._getBoundingBoxForWallLocation(wallLocation));
+      this.walls.forEach(wall => {
+        if (!wall.isDestroyed) {
+          monster.testWallCollision(wall);
+        }
       });
     });
-  }
-
-  _getBoundingBoxForWallLocation(location: GridLocation) {
-    // Return a bounding box that is slightly smaller than the wall
-    // to make sure that passing monsters don't get distracted!
-    return {
-      x: location.x * COLUMN_SIZE + 20,
-      y: location.y * ROW_SIZE + 20,
-      width: COLUMN_SIZE - 40,
-      height: ROW_SIZE - 40
-    };
   }
 }
