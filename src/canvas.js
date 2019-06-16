@@ -1,17 +1,22 @@
+// @flow
+
 const VIEWPORT_HEIGHT = 1080;
 const VIEWPORT_WIDTH = 720;
 const SCREEN_VIEWPORT_RATIO = window.innerHeight / VIEWPORT_HEIGHT;
 
-export class GameCanvas {
-  constructor(canvasElement) {
+export default class GameCanvas {
+  canvasElement: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+
+  constructor(canvasElement: HTMLCanvasElement) {
     this.canvasElement = canvasElement;
     this.context = canvasElement.getContext('2d');
 
     canvasElement.setAttribute('height', window.innerHeight);
-    canvasElement.setAttribute('width', VIEWPORT_WIDTH * SCREEN_VIEWPORT_RATIO);
+    canvasElement.setAttribute('width', (VIEWPORT_WIDTH * SCREEN_VIEWPORT_RATIO : any));
   }
   
-  drawImage(image, x, y, width, height, scale = 1.0) {
+  drawImage(image: Image, x: number, y: number, width: number, height: number, scale: number = 1.0) {
     const scaledWidth = width * scale;
     const scaledHeight = height * scale;
     this.context.drawImage(
@@ -31,7 +36,7 @@ export class GameCanvas {
       this.canvasElement.clientHeight);
   }
   
-  fillRect(style, x, y, width, height) {
+  fillRect(style: string, x: number, y: number, width: number, height: number) {
     this.context.fillStyle = style;
     this.context.fillRect(
       x * SCREEN_VIEWPORT_RATIO,

@@ -1,10 +1,18 @@
-const assets = require('./assets.js');
-import { Entity } from './entity.js';
+// @flow
+
+import assets from './assets.js';
+import Entity from './entity.js';
+import GameCanvas from './canvas.js';
 
 const COLUMN_SIZE = 120;
 const ROW_SIZE = 120;
 
-export class GameplayGrid extends Entity {
+type GridLocation = {| x: number, y: number |};
+
+export default class GameplayGrid extends Entity {
+  wallLocations: Array<GridLocation>;
+  wallImage: Image;
+
   constructor() {
     super();
     this.wallLocations = [];
@@ -16,14 +24,14 @@ export class GameplayGrid extends Entity {
     });
   }
 
-  addWallPiece(x, y) {
+  addWallPiece(x: number, y: number) {
     this.wallLocations.push({
       x: Math.floor(x / COLUMN_SIZE),
       y: Math.floor(y / ROW_SIZE)
     });
   }
   
-  draw(canvas) {
+  draw(canvas: GameCanvas) {
     this.wallLocations.forEach(wallLocation => {
       canvas.drawImage(
         this.wallImage,
@@ -35,7 +43,7 @@ export class GameplayGrid extends Entity {
     });
   }
 
-  update(_elapsedTime) {
+  update(_elapsedTime: number) {
     // Do nothing
   }
 }

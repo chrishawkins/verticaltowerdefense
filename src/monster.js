@@ -1,7 +1,15 @@
-const assets = require('./assets.js');
-import { Entity } from './entity.js';
+// @flow
 
-export class Monster extends Entity {
+import assets from './assets.js';
+import Entity from './entity.js';
+import GameCanvas from './canvas.js';
+
+export default class Monster extends Entity {
+  yPosition: number;
+  scale: number;
+  totalTime: number;
+  image: Image;
+
   constructor() {
     super();
     this.yPosition = 0;
@@ -15,11 +23,11 @@ export class Monster extends Entity {
     });
   }
 
-  draw(canvas) {
+  draw(canvas: GameCanvas) {
     canvas.drawImage(this.image, 25, this.yPosition, 128, 128, this.scale);
   }
 
-  update(elapsedSec) {
+  update(elapsedSec: number) {
     this.yPosition = this.yPosition + 10 * elapsedSec;
     
     this.totalTime += elapsedSec;

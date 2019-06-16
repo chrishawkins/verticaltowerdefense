@@ -1,12 +1,13 @@
-const assets = require('./assets.js');
-import { GameCanvas } from './canvas.js';
-import { Monster } from './monster.js';
-import { Wall } from './wall.js';
-import { ToolPalette } from './toolPalette.js';
-import { InputHelper } from './inputHelper.js';
-import { GameplayGrid } from './gameplayGrid.js';
+// @flow
 
-const gameCanvas = new GameCanvas(document.getElementById('main-canvas'));
+import assets from './assets.js';
+import GameCanvas from './canvas.js';
+import Monster from './monster.js';
+import ToolPalette from './toolPalette.js';
+import InputHelper from './inputHelper.js';
+import GameplayGrid from './gameplayGrid.js';
+
+const gameCanvas = new GameCanvas((document.getElementById('main-canvas') : any));
 new InputHelper(gameCanvas);
 
 const monster = new Monster();
