@@ -3,12 +3,14 @@ import { GameCanvas } from './canvas.js';
 import { Monster } from './monster.js';
 import { Wall } from './wall.js';
 import { ToolPalette } from './toolPalette.js';
+import { InputHelper } from './inputHelper.js';
 
 const gameCanvas = new GameCanvas(document.getElementById('main-canvas'));
+new InputHelper(gameCanvas);
 
 const monster = new Monster();
 
-const entities = [ monster, new ToolPalette() ];
+const entities = [ monster, new ToolPalette(gameCanvas) ];
 
 let time = 0;
 
