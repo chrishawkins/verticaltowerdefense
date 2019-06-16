@@ -7,7 +7,7 @@ export class Entity {
     throw new TypeError('Abstract class "Entity" cannot be instantiated directly.');
   }
 
-  update() {
+  update(_elapsedSec) {
     throw new TypeError('Abstract class "Entity" cannot be instantiated directly.');
   }
 }
