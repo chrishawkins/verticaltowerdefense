@@ -30,4 +30,21 @@ export class GameCanvas {
       this.canvasElement.clientWidth,
       this.canvasElement.clientHeight);
   }
+  
+  fillRect(style, x, y, width, height) {
+    this.context.fillStyle = style;
+    this.context.fillRect(
+      x * SCREEN_VIEWPORT_RATIO,
+      y * SCREEN_VIEWPORT_RATIO,
+      width * SCREEN_VIEWPORT_RATIO,
+      height * SCREEN_VIEWPORT_RATIO);
+  }
+
+  height() {
+    return VIEWPORT_HEIGHT;
+  }
+  
+  width() {
+    return VIEWPORT_WIDTH;
+  }
 }
