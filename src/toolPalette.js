@@ -3,7 +3,7 @@ import { Entity } from './entity.js';
 import { InputHelper } from './inputHelper.js';
 
 export class ToolPalette extends Entity {
-  constructor(canvas) {
+  constructor(canvas, grid) {
     super();
 
     this.isPlacingWall = false;
@@ -15,6 +15,8 @@ export class ToolPalette extends Entity {
       width: 128,
       height: 108
     };
+
+    this.grid = grid;
   }
 
   load() {
@@ -54,6 +56,10 @@ export class ToolPalette extends Entity {
       }
     }
     if (this.isPlacingWall && this.wasMouseDown && !InputHelper.instance.isMouseDown) {
+      this.grid.addWallPiece(
+        InputHelper.instance.mouseX,
+        InputHelper.instance.mouseY
+      );
       this.isPlacingWall = false;
     }
     this.wasMouseDown = InputHelper.instance.isMouseDown;
