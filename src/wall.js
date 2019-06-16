@@ -10,7 +10,7 @@ export default class Monster extends Entity {
   yPosition: number;
   underAttack: boolean;
   destroyed: boolean;
-  attackTime: number;
+  opacity: number;
   hits: number;
   image: Image;
 
@@ -19,7 +19,7 @@ export default class Monster extends Entity {
     this.xPosition = xPosition;
     this.yPosition = yPosition;
     this.underAttack = false;
-    this.attackTime = 0;
+    this.opacity = 1;
     this.hits = 3;
   }
 
@@ -38,15 +38,21 @@ export default class Monster extends Entity {
       this.xPosition,
       this.yPosition,
       128,
-      108);
+      108,
+      1.0,
+      this.opacity);
   }
 
-  update(_elapsedSec: number) {
+  update(elapsedSec: number) {
+    const targetOpacity = this.hits * 0.33;
+
+    if (this.opacity > targetOpacity) {
+      this.opacity -= 0.5 * elapsedSec;
+    }
   }
 
   attack(hits: number) {
     this.hits -= hits;
-    console.log('got attacked, hits =', this.hits);
     if (this.hits <= 0) {
       this.destroyed = true;
     }

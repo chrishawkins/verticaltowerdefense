@@ -54,5 +54,6 @@ export default class GameplayGrid extends Entity {
         }
       });
     });
+    this.walls.forEach(wall => wall.update(elapsedTime));
   }
 }

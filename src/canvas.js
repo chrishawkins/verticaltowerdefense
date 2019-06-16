@@ -16,15 +16,28 @@ export default class GameCanvas {
     canvasElement.setAttribute('width', (VIEWPORT_WIDTH * SCREEN_VIEWPORT_RATIO : any));
   }
   
-  drawImage(image: Image, x: number, y: number, width: number, height: number, scale: number = 1.0) {
+  drawImage(
+    image: Image,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    scale: number = 1.0,
+    opacity: number = 1.0,
+    compositeOperation: string = 'source-over'
+  ) {
     const scaledWidth = width * scale;
     const scaledHeight = height * scale;
+    this.context.save();
+    this.context.globalCompositeOperation = compositeOperation;
+    this.context.globalAlpha = opacity;
     this.context.drawImage(
       image,
       (x - (scaledWidth - width) / 2) * SCREEN_VIEWPORT_RATIO,
       (y - (scaledHeight - height) / 2) * SCREEN_VIEWPORT_RATIO,
       scaledWidth * SCREEN_VIEWPORT_RATIO,
       scaledHeight * SCREEN_VIEWPORT_RATIO);
+    this.context.restore();
   }
 
   clear() {
@@ -36,8 +49,15 @@ export default class GameCanvas {
       this.canvasElement.clientHeight);
   }
   
-  fillRect(style: string, x: number, y: number, width: number, height: number) {
+  fillRect(
+    style: string,
+    x: number,
+    y: number,
+    width: number,
+    height: number
+  ) {
     this.context.fillStyle = style;
+    this.context.globalCompositeOperation = 'source-over';
     this.context.fillRect(
       x * SCREEN_VIEWPORT_RATIO,
       y * SCREEN_VIEWPORT_RATIO,

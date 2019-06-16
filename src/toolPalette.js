@@ -54,7 +54,10 @@ export default class ToolPalette extends Entity {
         InputHelper.instance.mouseX - this.wallGrabPos.x,
         InputHelper.instance.mouseY - this.wallGrabPos.y,
         this.wallToolBounds.width,
-        this.wallToolBounds.height);
+        this.wallToolBounds.height,
+        1.0,
+        1.0,
+        'hard-light');
     }
   }
 

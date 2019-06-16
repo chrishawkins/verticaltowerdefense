@@ -51,7 +51,7 @@ export default class Monster extends Entity {
     } else if (this.state === 'ATTACKING' && target) {
       if (target.isDestroyed) {
         this.state = 'DESCENDING';
-      } else if (this.totalTime - this.lastAttackTime > 1) {
+      } else if (this.totalTime - this.lastAttackTime > Math.PI) {
         target.attack(1);
         this.lastAttackTime = this.totalTime;
       }
