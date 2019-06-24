@@ -65,6 +65,23 @@ export default class GameCanvas {
       height * SCREEN_VIEWPORT_RATIO);
   }
 
+  writeText(
+    text: string,
+    font: string,
+    color: string,
+    alignment: string,
+    x: number,
+    y: number
+  ) {
+    this.context.fillStyle = color;
+    this.context.font = font;
+    this.context.textAlign = alignment;
+    this.context.fillText(
+      text,
+      x * SCREEN_VIEWPORT_RATIO,
+      y * SCREEN_VIEWPORT_RATIO);
+  }
+
   get height() {
     return VIEWPORT_HEIGHT;
   }

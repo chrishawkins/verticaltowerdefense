@@ -77,4 +77,8 @@ export default class Monster extends Entity {
       this.lastAttackTime = this.totalTime;
     }
   }
+
+  get yPos() {
+    return this.yPosition;
+  }
 }
