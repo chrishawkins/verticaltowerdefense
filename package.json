@@ -17,6 +17,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
